@@ -46,7 +46,7 @@ Once is valid, we can remove those empty strings, and order the gaps from the lo
 const biggestToSmallest = (a, b) => b.length - a.length;
 const notEmpty = x => x !== '';
 
-const onlyGapsSorted = onlyZerosList.filter(notEmpty).sort(biggestToSmallest);
+const onlyGapsSorted = arr.filter(notEmpty).sort(biggestToSmallest);
 ```
 
 and now return the head of the arr. (first index).
