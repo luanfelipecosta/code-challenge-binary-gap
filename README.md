@@ -22,7 +22,16 @@ Write an efficient algorithm for the following assumptions:
 
 N is an integer within the range [1..2,147,483,647].
 
+# Running the solution
+
+1. Clone the project
+2. run `cd code-challenge-binary-gap`
+3. `yarn start` to run the tests
+
+
 # My solution
+
+## Full solution available in index.js 
 
 I notice that after splitting our Binary String from N by "1", the result was something like:
 
@@ -37,7 +46,11 @@ const arr = N.toString(2).split('1');
 Arrays with valid gaps, beggin and ends with "" (old 1's).
 
 ```javascript
-const isTrullyGap = arr[0] === '' && arr[arr.length - 1] === '';
+const isValidGap = arr[0] === '' && arr[arr.length - 1] === '';
+
+if (isValidGap) {
+  // ...
+}
 ```
 
 Once is valid, we can remove those empty strings, and order the gaps from the longest to the shortest.
