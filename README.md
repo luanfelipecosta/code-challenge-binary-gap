@@ -29,40 +29,6 @@ N is an integer within the range [1..2,147,483,647].
 3. `yarn start` to run the tests
 
 
-# My solution
-
 ## Full solution available in index.js 
-
-I notice that after splitting our Binary String from N by "1", the result was something like:
-
-```javascript
-const arr = N.toString(2).split('1');
-/*
-  N: 12655 (10011110001)  =>  ["", "00", "", "", "", "000", ""]
-  N: 32 (100000)  =>  ["","00000"];
-*/
-```
-
-Arrays with valid gaps, beggin and ends with "" (old 1's).
-
-```javascript
-const isValidGap = arr[0] === '' && arr[arr.length - 1] === '';
-
-if (isValidGap) {
-  // ...
-}
-```
-
-Once is valid, we can remove those empty strings, and order the gaps from the longest to the shortest.
-
-```javascript
-const biggestToSmallest = (a, b) => b.length - a.length;
-const notEmpty = x => x !== '';
-
-const onlyGapsSorted = arr.filter(notEmpty).sort(biggestToSmallest);
-```
-
-and now return the head of the arr. (first index).
-
 
 

@@ -1,23 +1,35 @@
+const isEmpty = arr => Boolean(!arr.length);
 const biggestToSmallest = (a, b) => b.length - a.length;
-const notEmpty = x => x !== '';
+
+const removeEmpty = x => x != '1';
+
+const gapsOnly = arr => arr.filter(removeEmpty).sort(biggestToSmallest);
+
+const getBiggestGap = arr => (isEmpty(gapsOnly(arr)) ? 0 : String(gapsOnly(arr)[0]).length);
 
 function solution(N) {
   const bin = N.toString(2);
-  const onlyZerosList = bin.split('1');
-  // N:12655 => 10011110001 => ["", "00", "", "", "", "000", ""]
-  const lastI = onlyZerosList.length - 1;
-  const isTrullyGap = onlyZerosList[0] == '' && onlyZerosList[lastI] == '';
+  /*
+    this will group 0's and keep 1's.
+    4104 => 0010010 => ["1", "00000000", "000"]
+  */
+  const arr = bin.split('1').map(x => (x == '' ? '1' : x));
+  console.log(`${N} (${bin}) => ${arr}`);
 
-  if (isTrullyGap) {
-    const onlyGapsSorted = onlyZerosList.filter(notEmpty).sort(biggestToSmallest);
-    return onlyGapsSorted && onlyGapsSorted[0] ? onlyGapsSorted[0].length : 0;
+  if (arr[0] !== '1') {
+    console.log(`["00", ...] gap not sorounded by 1 found in the Array's head`);
+    arr.shift();
   }
-  return 0;
+  if (arr[arr.length - 1] !== '1') {
+    console.log(`[... , "000"] gap not sorounded by 1 found in the Array's tail`);
+    arr.pop();
+  }
+  console.log(`gaps: ${arr}, biggest: ${getBiggestGap(arr)}`);
+
+  return getBiggestGap(arr);
 }
 
-const testN = N => console.log(`Solution(${N}) (${N.toString(2)}) = ${solution(N)};`);
-
-
-testN(1041);
-testN(529);
-testN(15);
+solution(12232);
+solution(8573);
+solution(487);
+solution(12);
